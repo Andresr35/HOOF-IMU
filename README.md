@@ -38,6 +38,8 @@ Kyle G:
 - [GitHub](https://github.com/kyobg)
 - [LinkedIn](https://www.linkedin.com/in/kyle-b-garcia/)
 
+Andres R
+
 Kevin B:
 - [GitHub](https://github.com/kevinbrannan)
 - [LinkedIn](https://www.linkedin.com/in/kevin-brannan-885446233/)
