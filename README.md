@@ -140,8 +140,11 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [x] Distance/Reliablility measurement ~40 ft
 - [x] Complete power management system
 - [x] Complete real-time plotting using BetterSerialMonitor
-- [ ] Integrate GPS into the IMU system No Longer Feasbile due to Time Constraints
+- [ ] Integrate GPS into the IMU system No Longer Feasbile due
+      to Time Constraints
 - [ ] Complete PCB design with integrated circuits and order appropriate chips Future Goal
+- [ ] Replace SEED with nRF52840
+
       See the [open issues](https://github.com/Jdiazcaminos/HOOF-IMU/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
