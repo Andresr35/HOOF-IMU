@@ -10,6 +10,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+// bluetooth
+#include <zephyr/bluetooth/bluetooth.h>
+#include <zephyr/bluetooth/gap.h>
 
 #include "helpers.h"
 #include "gps.h"
