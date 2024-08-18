@@ -13,3 +13,13 @@ void printGGA(gga gpsData)
     printk("MSL Altitude: %s %c\n", gpsData.mslAltitude, gpsData.altitudeUnits);
     printk("Geoidal Separation: %s %c\n", gpsData.geoidalSeparation, gpsData.geoidalUnits);
 }
+void printIMU(gyro gyro, accel accel, int16_t temp)
+{
+    printk("Temperature in Fahrenheit : %d F \n", temp);
+    printk("Gyro X is : %d  \n", gyro.x);
+    printk("Gyro Y is : %d  \n", gyro.y);
+    printk("Gyro Z is : %d  \n", gyro.z);
+    printk("Accel X is : %d  \n", accel.x);
+    printk("Accel Y is : %d  \n", accel.y);
+    printk("Accel Z is : %d  \n", accel.z);
+}

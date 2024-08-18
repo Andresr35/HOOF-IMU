@@ -14,6 +14,7 @@
 #include "helpers.h"
 #include "gps.h"
 #include "imu.h"
+#include "highGAccel.h"
 
 #define SLEEP_TIME 3000
 

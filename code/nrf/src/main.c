@@ -12,22 +12,24 @@ int main(void)
         ret = initIMU();
         if (ret == -1)
                 return 1;
+        ret = initHighAccel();
+        if (ret == -1)
+                return 1;
+        accel highGAccel;
         accel accel;
         gyro gyro;
+
         while (1)
         {
                 k_msleep(SLEEP_TIME);
                 printk("Working\n");
                 readAccel(&accel);
                 readGyro(&gyro);
-                printk("Temperature in Fahrenheit : %d F \n", getTemp());
-                printk("Gyro X is : %d  \n", gyro.x);
-                printk("Gyro Y is : %d  \n", gyro.y);
-                printk("Gyro Z is : %d  \n", gyro.z);
-                printk("Accel X is : %d  \n", accel.x);
-                printk("Accel Y is : %d  \n", accel.y);
-                printk("Accel Z is : %d  \n", accel.z);
-
+                printIMU(gyro, accel, getTemp());
+                readHighAccel(&highGAccel);
+                printk("high Accel X is : %d  \n", highGAccel.x);
+                printk("high Accel Y is : %d  \n", highGAccel.y);
+                printk("high Accel Z is : %d  \n", highGAccel.z);
                 // printGGA(gps.gpgga);
         }
 
