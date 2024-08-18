@@ -16,7 +16,7 @@ To connect all devices using SPI/SDA and provide information back to laptop serv
 
 ### Prerequisites and Installation
 
-1. Follow the NRF Getting started page [NRF Software Getting Started](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fsdk_nrf5_v17.0.2%2Fgetting_started_precompiled.html)
+1. Follow the NRF Getting started page [NRF Software Getting Started](https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/index.html)
 
 - This will include downloading the SDK and Toolkit for NRF5 devices
 - It is suggested to try to follow most steps using the "NRF Connect" plugin on VSCode to run the Blinky example
@@ -35,6 +35,8 @@ If you would like to learn how most of the project works, the following code sam
   - This is good for a basic example of how bluetooth can be programmed
 - [I2C Example](https://github.com/nrfconnect/sdk-zephyr/tree/v3.5.99-ncs1/samples/sensor/sht3xd/)
   - This is good for programming I2C capability with sensors.
+
+I also followed this guide to learn how to use the: [Nordic nRF SDK ](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-1-nrf-connect-sdk-introduction/)
 
 Together these two examples can show how to send data from our I2C sensors through bluetooth to later process.
 
