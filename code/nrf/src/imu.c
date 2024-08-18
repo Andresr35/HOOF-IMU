@@ -167,3 +167,27 @@ int readGyro(gyro *gyro)
     gyro->z -= (gyro->z % 10);
     return 1;
 }
+
+int16_t getTemp()
+{
+    int16_t temperature;
+    uint8_t tempLow, tempHigh;
+    uint8_t sensor_regs[2] = {OUTTEMPL, OUTTEMPH};
+    int ret;
+    ret = i2c_write_read_dt(&imu, &sensor_regs[0], 1, &tempLow, 1);
+    if (ret != 0)
+    {
+        printk("Failed to write/read I2C device address %x at Reg. %x \r\n", imu.addr, sensor_regs[0]);
+        return -1;
+    }
+    ret = i2c_write_read_dt(&imu, &sensor_regs[1], 1, &tempHigh, 1);
+    if (ret != 0)
+    {
+        printk("Failed to write/read I2C device address %x at Reg. %x \r\n", imu.addr, sensor_regs[1]);
+        return -1;
+    }
+    temperature = 25 + ((int16_t)(tempHigh << 8 | tempLow)) / 256;
+    // if(temperature>2047)temperature-=4096;
+    temperature = (temperature * 1.8) + 32;
+    return temperature;
+}

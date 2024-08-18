@@ -49,5 +49,5 @@ typedef struct gyro
 int initIMU();
 int readAccel(accel *accel);
 int readGyro(gyro *gyro);
-
+int16_t getTemp();
 #endif

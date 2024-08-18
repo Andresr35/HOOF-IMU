@@ -20,6 +20,7 @@ int main(void)
                 printk("Working\n");
                 readAccel(&accel);
                 readGyro(&gyro);
+                printk("Temperature in Fahrenheit : %d F \n", getTemp());
                 printk("Gyro X is : %d  \n", gyro.x);
                 printk("Gyro Y is : %d  \n", gyro.y);
                 printk("Gyro Z is : %d  \n", gyro.z);
