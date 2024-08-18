@@ -17,12 +17,11 @@ typedef struct gga
     char ewIndicator;        // E/W
     char positionIndicator;  // 0: no fix, 1:GPS fix, 2: Differential GPS fix
     char numOfSatellites[3]; // 0-14
-    char hdop[4];
-    char *mslAltitude;
+    char hdop[5];
+    char mslAltitude[5];
     char altitudeUnits;
-    char *geoidalSeparation;
+    char geoidalSeparation[6];
     char geoidalUnits;
-    int age;
 } gga;
 
 typedef struct rmc

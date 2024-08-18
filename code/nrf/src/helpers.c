@@ -12,7 +12,6 @@ void printGGA(gga gpsData)
     printk("Position Indicator: %c\n", gpsData.positionIndicator);
     printk("Number of Satellites: %s\n", gpsData.numOfSatellites);
     printk("HDOP: %s\n", gpsData.hdop);
-    // printk("MSL Altitude: %s %c\n", gpsData.mslAltitude, gpsData.altitudeUnits);
-    // printk("Geoidal Separation: %s %c\n", gpsData.geoidalSeparation, gpsData.geoidalUnits);
-    // printk("Age: %d\n", gpsData.age);
+    printk("MSL Altitude: %s %c\n", gpsData.mslAltitude, gpsData.altitudeUnits);
+    printk("Geoidal Separation: %s %c\n", gpsData.geoidalSeparation, gpsData.geoidalUnits);
 }

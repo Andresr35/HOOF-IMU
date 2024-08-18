@@ -17,31 +17,15 @@ gpgps gps;
 
 void parse_nmea(const char *nmea_sentence)
 {
-        // printk("Running\n");
-        // char *sentences = (char *)malloc(GPS_RECEIVE_BUFF_SIZE);
-
-        // strncpy(sentences, nmea_sentence, GPS_RECEIVE_BUFF_SIZE - 1);
-        // // printk("Line: %s\n", sentences);
         char *saveptr;
-        // // Skip the first one cause its bad
         char *line = strtok_r(nmea_sentence, "\n", &saveptr);
-        // // printk("First line is: %s\n", line);
-
-        // // printk("Second line is: %s\n", line);
-        // // Looping through each line
-
         char *id;
         while ((line = strtok_r(NULL, "\n", &saveptr)))
         {
                 char *saveIDPointer;
-                //         // printk("Line: %s\n", line);
-
                 id = strtok_r(line, ",", &saveIDPointer);
-                //         // printk("ID is:%s\n", id);
-                //         // // Looping through each id
                 if (strcmp(id, "$GPGGA") == 0)
                 {
-                        // printk("We got some data");
                         int i = 0;
                         while ((id = strtok_r(NULL, ",", &saveIDPointer)))
                         {
@@ -102,21 +86,33 @@ void parse_nmea(const char *nmea_sentence)
                                                 gps.gpgga.hdop[4] = '\0';
                                         }
                                         break;
-                                // case 8:
-                                //         gps.gpgga.mslAltitude = strtof(id, NULL);
-                                //         break;
-                                // case 9:
-                                //         gps.gpgga.altitudeUnits = id[0];
-                                //         break;
-                                // case 10:
-                                //         gps.gpgga.geoidalSeparation = strtof(id, NULL);
-                                //         break;
-                                // case 11:
-                                //         gps.gpgga.geoidalUnits = id[0];
-                                //         break;
-                                // case 12:
-                                //         gps.gpgga.age = (int)strtol(id, NULL, 10);
-                                //         break;
+                                case 8:
+                                        if (strlen(id) == 4)
+                                        {
+                                                strncpy(gps.gpgga.mslAltitude, id, 4);
+                                                gps.gpgga.mslAltitude[4] = '\0';
+                                        }
+                                        break;
+                                case 9:
+                                        if (strlen(id) == 1)
+                                        {
+                                                gps.gpgga.altitudeUnits = id[0];
+                                        }
+                                        break;
+                                case 10:
+                                        if (strlen(id) == 5)
+                                        {
+                                                strncpy(gps.gpgga.geoidalSeparation, id, 5);
+                                                gps.gpgga.geoidalSeparation[5] = '\0';
+                                        }
+                                        break;
+                                case 11:
+                                        if (strlen(id) == 1)
+                                        {
+                                                gps.gpgga.geoidalUnits = id[0];
+                                        }
+                                        break;
+
                                 default:
                                         break;
                                 }
@@ -135,9 +131,6 @@ static void gps_uart_cb(const struct device *dev, struct uart_event *evt, void *
         {
 
         case UART_RX_RDY:
-                // printk("got something\n");
-                // Check if a complete NMEA sentence has been received
-                // printk("The new size is: ", evt->data.rx.len);
                 if (evt->data.rx.len > GPS_RECEIVE_BUFF_SIZE)
                 {
 
