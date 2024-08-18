@@ -1,6 +1,4 @@
 #include "helpers.h"
-#include "main.h"
-#include <zephyr/sys/printk.h>
 
 void printGGA(gga gpsData)
 {

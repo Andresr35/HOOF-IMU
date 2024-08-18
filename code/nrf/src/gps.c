@@ -1,18 +1,9 @@
 #include "gps.h"
-#include "main.h"
-#include <zephyr/sys/printk.h>
-#include <zephyr/kernel.h>
-
-#include <zephyr/drivers/uart.h>
-#include <zephyr/devicetree.h>
-
-#include <unistd.h>
-#include <zephyr/device.h>
-#include <stdlib.h>
-#include <string.h>
 
 static uint8_t gps_rx_next_buf[GPS_RECEIVE_BUFF_SIZE] = {0};
 static uint8_t gps_rx_buf[GPS_RECEIVE_BUFF_SIZE] = {0};
+
+const struct device *gpsUart = DEVICE_DT_GET(DT_NODELABEL(uart1));
 
 void parse_nmea(const char *nmea_sentence, gpgps *gps)
 {
@@ -151,7 +142,7 @@ static void gps_uart_cb(const struct device *dev, struct uart_event *evt, void *
     }
 }
 
-int init_gps(const struct device *gpsUart, gpgps *gps)
+int init_gps(gpgps *gps)
 {
     if (!device_is_ready(gpsUart))
     {

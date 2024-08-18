@@ -1,33 +1,33 @@
-#include <zephyr/kernel.h>
-#include <zephyr/device.h>
-#include <zephyr/devicetree.h>
-#include <zephyr/drivers/gpio.h>
-#include <zephyr/sys/printk.h>
-#include <zephyr/drivers/uart.h>
-#include <unistd.h>
-#include <stdlib.h>
-
 #include "main.h"
-#include "helpers.h"
-#include "gps.h"
-
-const struct device *gpsUart = DEVICE_DT_GET(DT_NODELABEL(uart1));
 
 gpgps gps;
-
-static bool using_buf1 = true;
 
 int main(void)
 {
         printk("\nStarting application!\r\n");
-        int ret = init_gps(gpsUart, &gps);
+        int ret = init_gps(&gps);
         if (ret == -1)
                 return 1;
+
+        ret = initIMU();
+        if (ret == -1)
+                return 1;
+        accel accel;
+        gyro gyro;
         while (1)
         {
                 k_msleep(SLEEP_TIME);
                 printk("Working\n");
-                printGGA(gps.gpgga);
+                readAccel(&accel);
+                readGyro(&gyro);
+                printk("Gyro X is : %d  \n", gyro.x);
+                printk("Gyro Y is : %d  \n", gyro.y);
+                printk("Gyro Z is : %d  \n", gyro.z);
+                printk("Accel X is : %d  \n", accel.x);
+                printk("Accel Y is : %d  \n", accel.y);
+                printk("Accel Z is : %d  \n", accel.z);
+
+                // printGGA(gps.gpgga);
         }
 
         return 0;
