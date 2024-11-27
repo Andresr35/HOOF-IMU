@@ -27,7 +27,7 @@ int initIMU()
     }
 
     // Setup accel
-    uint8_t config[2] = {CTRL1XL, 0x40};
+    uint8_t config[2] = {CTRL1XL, 0x40}; // 0100 0000
     ret = i2c_write_dt(&imu, config, sizeof(config));
     if (ret != 0)
     {
@@ -37,7 +37,7 @@ int initIMU()
 
     // Setup gyro
     //  200dps
-    uint8_t gconfig[2] = {CTRL2G, 0x60};
+    uint8_t gconfig[2] = {CTRL2G, 0x60}; // 0110 0000
     ret = i2c_write_dt(&imu, gconfig, sizeof(gconfig));
     if (ret != 0)
     {
@@ -71,7 +71,7 @@ int readAccel(accel *accel)
         printk("Failed to write/read I2C device address %x at Reg. %x \r\n", imu.addr, WHOAMI);
         return -1;
     }
-    accel->x = ((int16_t)(accelXHigh << 8 | accelXLow)) / ACCELSENSITIVITY;
+    accel->x = (((int16_t)(accelXHigh << 8 | accelXLow)) * 0.061);
 
     u_int16_t accelYLow, accelYHigh;
     uint8_t sensor_regsY[2] = {OUTYLA, OUTYHA};
@@ -87,7 +87,7 @@ int readAccel(accel *accel)
         printk("Failed to write/read I2C device address %x at Reg. %x \r\n", imu.addr, WHOAMI);
         return -1;
     }
-    accel->y = ((int16_t)(accelYHigh << 8 | accelYLow)) / ACCELSENSITIVITY;
+    accel->y = (((int16_t)(accelYHigh << 8 | accelYLow)) * 0.061);
 
     u_int16_t accelZLow, accelZHigh;
     uint8_t sensor_regsz[2] = {OUTZLA, OUTZHA};
@@ -103,11 +103,11 @@ int readAccel(accel *accel)
         printk("Failed to write/read I2C device address %x at Reg. %x \r\n", imu.addr, WHOAMI);
         return -1;
     }
-    accel->z = ((int16_t)(accelZHigh << 8 | accelZLow)) / ACCELSENSITIVITY;
+    accel->z = (((int16_t)(accelZHigh << 8 | accelZLow)) * 0.061) - 350;
 
-    accel->x -= (accel->x % 50);
-    accel->y -= (accel->y % 50);
-    accel->z -= (accel->z % 50);
+    accel->x -= (accel->x % 20);
+    accel->y -= (accel->y % 20);
+    accel->z -= (accel->z % 20);
     return 1;
 }
 

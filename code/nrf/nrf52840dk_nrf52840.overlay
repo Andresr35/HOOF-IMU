@@ -40,5 +40,11 @@
         reg = <0x6B>;              // address of the accelerameter
         label = "ACCELSENSOR";   // label
     };
+    magnetometer:magnetometer@30{
+        compatible="i2c-device";
+        status="okay";
+        reg = <0x30>;
+        label="MAGNETOMETER";
+    };
 
 };

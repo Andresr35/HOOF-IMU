@@ -30,6 +30,7 @@
 #define OUTTEMPH 0x21
 // sensitivity
 #define GYROSENSITIVITY 16.4
+//
 #define ACCELSENSITIVITY 16
 
 typedef struct accel
